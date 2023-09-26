@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">We Can</string>
+    <string name="kantong_donasi">Kantong donasi :</string>
+    <string name="isi_saldo">Isi Saldo</string>
+    <string name="riwayat_donasi">Riwayat Donasi</string>
+    <string name="donasi_otomatis">Donasi Otomatis</string>
 </resources>
