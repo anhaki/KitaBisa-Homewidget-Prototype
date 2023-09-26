@@ -4,4 +4,16 @@
     <string name="isi_saldo">Isi Saldo</string>
     <string name="riwayat_donasi">Riwayat Donasi</string>
     <string name="donasi_otomatis">Donasi Otomatis</string>
+
+    <string name="judul1">Bantu Ibu X untuk operasi</string>
+    <string name="judul2">Kebakaran rusun</string>
+    <string name="judul3">Bantu korban bencana banjir</string>
+
+    <string name="subJudul1">Ibu X berpenyakit paru-paru</string>
+    <string name="subJudul2">Kebakaran rusun di daerah Y</string>
+    <string name="subJudul3">Banjir melanda pada provinsi Z</string>
+
+    <string name="deskripsi1">Urgent! Untuk biaya operasi segera agar tidak bertambah..</string>
+    <string name="deskripsi2">Mengakibatkan kerugian senilai 100 juta dan menelan korban..</string>
+    <string name="deskripsi3">Lebih dari 700 rumah terdampak bencana ini, 2890 orang terkena..</string>
 </resources>
