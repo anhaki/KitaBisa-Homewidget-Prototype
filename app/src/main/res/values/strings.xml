@@ -16,4 +16,7 @@
     <string name="deskripsi1">Urgent! Untuk biaya operasi segera agar tidak bertambah..</string>
     <string name="deskripsi2">Mengakibatkan kerugian senilai 100 juta dan menelan korban..</string>
     <string name="deskripsi3">Lebih dari 700 rumah terdampak bencana ini, 2890 orang terkena..</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
