@@ -1,9 +1,14 @@
 package com.kitapacak.wecan.widget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.widget.RemoteViews
+import com.kitapacak.wecan.DonasiOtomatisActivity
+import com.kitapacak.wecan.IsiSaldoActivity
 import com.kitapacak.wecan.R
 
 /**
@@ -35,10 +40,25 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
+    val buildCheck = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE else 0
+
+    //Buat Intent ke Isi Saldo Activity
+    val intentToIsiSaldo = Intent(context, IsiSaldoActivity::class.java)
+    val pendingIntent = PendingIntent.getActivity(context,0,intentToIsiSaldo,buildCheck)
+
+    //Intent ke Activity Donasi Otomatis
+    val intentToDO = Intent(context,DonasiOtomatisActivity::class.java)
+    val pendingIntent2 = PendingIntent.getActivity(context,0,intentToDO,buildCheck)
+
+
     val widgetText = context.getString(R.string.appwidget_text)
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.jadwal_solat)
 //    views.setTextViewText(R.id.appwidget_text, widgetText)
+
+    views.setOnClickPendingIntent(R.id.btn_isi, pendingIntent)
+
+    views.setOnClickPendingIntent(R.id.dono,pendingIntent2)
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)

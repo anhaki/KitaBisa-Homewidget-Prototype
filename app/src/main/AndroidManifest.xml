@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeCan"
         tools:targetApi="31">
+
         <receiver
             android:name=".widget.JadwalSolat"
             android:exported="false">
@@ -26,15 +27,19 @@
 
         <activity
             android:name=".DonasiOtomatisActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".IsiSaldoActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".RiwayatActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:background="#D2F1FF"
+        android:background="@drawable/custom_background"
         >
         <RelativeLayout
             android:id="@+id/firstLayer"
@@ -267,8 +267,9 @@
                 android:textColor="@color/light_blue_600"
                 android:layout_below="@id/ttlDonasi"
                 android:textSize="12sp"/>
-            
+
             <Button
+                android:id="@+id/btn_isi"
                 android:layout_width="70dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
