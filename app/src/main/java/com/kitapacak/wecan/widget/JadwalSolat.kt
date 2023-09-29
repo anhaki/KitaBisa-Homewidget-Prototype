@@ -1,5 +1,6 @@
 package com.kitapacak.wecan.widget
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -15,6 +16,7 @@ import com.kitapacak.wecan.R
  * Implementation of App Widget functionality.
  */
 class JadwalSolat : AppWidgetProvider() {
+
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -33,6 +35,12 @@ class JadwalSolat : AppWidgetProvider() {
     override fun onDisabled(context: Context) {
         // Enter relevant functionality for when the last widget is disabled
     }
+
+    override fun onReceive(context: Context?, intent: Intent?) {
+        super.onReceive(context, intent)
+    }
+
+
 }
 
 internal fun updateAppWidget(
@@ -40,26 +48,33 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
-    val buildCheck = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE else 0
+    val buildCheck =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE else 0
 
     //Buat Intent ke Isi Saldo Activity
     val intentToIsiSaldo = Intent(context, IsiSaldoActivity::class.java)
-    val pendingIntent = PendingIntent.getActivity(context,0,intentToIsiSaldo,buildCheck)
+    val pendingIntent = PendingIntent.getActivity(context, 0, intentToIsiSaldo, buildCheck)
 
     //Intent ke Activity Donasi Otomatis
-    val intentToDO = Intent(context,DonasiOtomatisActivity::class.java)
-    val pendingIntent2 = PendingIntent.getActivity(context,0,intentToDO,buildCheck)
+    val intentToDO = Intent(context, DonasiOtomatisActivity::class.java)
+    val pendingIntent2 = PendingIntent.getActivity(context, 0, intentToDO, buildCheck)
 
 
     val widgetText = context.getString(R.string.appwidget_text)
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.jadwal_solat)
-//    views.setTextViewText(R.id.appwidget_text, widgetText)
 
+    //ButtonAction Isi Saldo
     views.setOnClickPendingIntent(R.id.btn_isi, pendingIntent)
+    //ButtonAction Donasi Otomatis
+    views.setOnClickPendingIntent(R.id.dono, pendingIntent2)
 
-    views.setOnClickPendingIntent(R.id.dono,pendingIntent2)
+
+
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
 }
+
+
+

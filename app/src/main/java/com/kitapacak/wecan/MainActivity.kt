@@ -16,9 +16,13 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         binding.isiSaldo.setOnClickListener(this)
         binding.riwayat.setOnClickListener(this)
         binding.donasi.setOnClickListener(this)
+
+        //masukin nilai Duet
+        binding.tvCashDonasi.text = duetAnda.toString()
     }
 
     override fun onClick(view: View?) {
@@ -36,5 +40,9 @@ class MainActivity : AppCompatActivity(), OnClickListener {
                 startActivity(intent)
             }
         }
+    }
+
+    companion object {
+        private var duetAnda = 10000
     }
 }
