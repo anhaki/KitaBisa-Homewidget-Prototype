@@ -1,26 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:theme="@style/Theme.WeCan.AppWidgetContainer"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/Theme.WeCan.AppWidgetContainer">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
         android:background="@drawable/custom_background"
-        >
+        android:padding="20dp">
+
         <RelativeLayout
             android:id="@+id/firstLayer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:id="@+id/topLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/logo"
@@ -32,58 +33,58 @@
                     android:id="@+id/titleWaktu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="Waktu sholat selanjutnya"
-                    android:textSize="12sp"
-                    android:layout_marginTop="5dp"/>
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/nextSholat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ashar 15:21 WIB"
-                    android:textSize="20sp"
-                    android:fontFamily="sans-serif-black"
-                    android:textStyle="bold"
                     android:layout_marginTop="5dp"
-                    android:textColor="#2270AE"/>
+                    android:fontFamily="sans-serif-black"
+                    android:text="Ashar 15:21 WIB"
+                    android:textColor="#2270AE"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
                 android:gravity="end"
-                android:layout_alignParentEnd="true">
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/kaaba"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:padding="5dp"
                     android:background="@color/white"
+                    android:padding="5dp"
                     android:src="@drawable/img_1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/mshDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="3 Juli 2023 M"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/kaaba"
                     android:textStyle="bold"
-                    android:layout_marginTop="5dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/kaaba" />
 
                 <TextView
                     android:id="@+id/hjrDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="14 Dzulhijjah 1444 H"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mshDate"
                     android:textStyle="bold"
-                    android:layout_marginTop="5dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mshDate" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -91,9 +92,9 @@
             android:id="@+id/gapLine"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#B5B5B5"
-            android:layout_marginVertical="10dp"
             android:layout_below="@id/firstLayer"
+            android:layout_marginVertical="10dp"
+            android:background="#B5B5B5"
             android:orientation="horizontal" />
 
         <LinearLayout
@@ -102,12 +103,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/gapLine"
             android:weightSum="6">
+
             <LinearLayout
                 android:id="@+id/imsakView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/ttlImsak"
@@ -115,22 +117,23 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Imsak" />
+
                 <TextView
                     android:id="@+id/timeImsak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="04:33"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/subuhView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/ttlSubuh"
@@ -138,106 +141,111 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Subuh" />
+
                 <TextView
                     android:id="@+id/timeSubuh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="04:43"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/dzuhurView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/ttlDzuhur"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dzuhur"
                     android:layout_gravity="center"
-                    />
+                    android:text="Dzuhur" />
+
                 <TextView
                     android:id="@+id/timeDzuhur"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="15:21"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/asharView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/ttlAshar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ashar"
                     android:layout_gravity="center"
-                    />
+                    android:text="Ashar" />
+
                 <TextView
                     android:id="@+id/timeAshar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="12:00"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/magribView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/ttlMagrib"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Magrib"
                     android:layout_gravity="center"
-                    />
+                    android:text="Magrib" />
+
                 <TextView
                     android:id="@+id/timeMagrib"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="17:53"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/isyaView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/ttlIsya"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Isya"
                     android:layout_gravity="center"
-                    />
+                    android:text="Isya" />
+
                 <TextView
                     android:id="@+id/timeIsya"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="19:07"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
@@ -246,27 +254,30 @@
         android:id="@+id/thirdLayer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:padding="20dp">
+
         <RelativeLayout
             android:id="@+id/down1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/ttlDonasi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kantong Donasimu"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/saldo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="XXXX"
-                android:textStyle="bold"
-                android:textColor="@color/light_blue_600"
                 android:layout_below="@id/ttlDonasi"
-                android:textSize="12sp"/>
+                android:text="Rp. 2000"
+                android:textColor="@color/light_blue_600"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btn_isi"
@@ -275,51 +286,53 @@
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/ttlDonasi"
                 android:backgroundTint="@color/light_blue_600"
+                android:elevation="0dp"
                 android:text="Isi"
-                android:textSize="12sp"
                 android:textColor="@color/white"
-                android:elevation="0dp"/>
+                android:textSize="12sp" />
         </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/gapLine2"
             android:layout_width="1dp"
             android:layout_height="40dp"
-            android:background="#B5B5B5"
             android:layout_marginHorizontal="10dp"
-            android:orientation="horizontal"
             android:layout_toEndOf="@id/down1"
-            />
+            android:background="#B5B5B5"
+            android:orientation="horizontal" />
 
         <RelativeLayout
             android:id="@+id/dono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true">
+
             <TextView
                 android:id="@+id/ttlOto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Donasi Otomatis"
 
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/seeDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lihat Detail"
-                android:textStyle="bold"
-                android:textColor="@color/light_blue_600"
                 android:layout_below="@id/ttlOto"
-                android:textSize="12sp"/>
+                android:text="Lihat Detail"
+                android:textColor="@color/light_blue_600"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_arrow_forward_ios_24"
-                app:tint="#737373"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/ttlOto"
-                android:layout_centerVertical="true"/>
+                android:src="@drawable/baseline_arrow_forward_ios_24"
+                app:tint="#737373" />
         </RelativeLayout>
     </RelativeLayout>
 

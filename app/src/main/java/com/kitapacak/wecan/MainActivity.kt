@@ -16,33 +16,33 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.isiSaldo.setOnClickListener(this)
         binding.riwayat.setOnClickListener(this)
         binding.donasi.setOnClickListener(this)
-
-        //masukin nilai Duet
-        binding.tvCashDonasi.text = duetAnda.toString()
+        binding.setting.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
-        when(view){
+        when (view) {
             binding.isiSaldo -> {
                 val intent = Intent(this@MainActivity, IsiSaldoActivity::class.java)
                 startActivity(intent)
             }
+
             binding.riwayat -> {
                 val intent = Intent(this@MainActivity, RiwayatActivity::class.java)
                 startActivity(intent)
             }
+
             binding.donasi -> {
                 val intent = Intent(this@MainActivity, DonasiOtomatisActivity::class.java)
                 startActivity(intent)
             }
-        }
-    }
 
-    companion object {
-        private var duetAnda = 10000
+            binding.setting -> {
+                val intent = Intent(this@MainActivity, SettingsActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }

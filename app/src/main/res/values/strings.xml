@@ -20,4 +20,5 @@
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="dummy_cash">2000</string>
+    <string name="pengaturan">Pengaturan</string>
 </resources>

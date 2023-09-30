@@ -54,6 +54,7 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
+
     val buildCheck = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE else 0
 
     //Buat Intent ke Isi Saldo Activity
@@ -108,7 +109,7 @@ internal fun updateAppWidget(
                 views.setTextViewText(R.id.mshDate, response.body()?.jadwal?.data?.tanggal + " M")
                 try {
                     val hijriDate = getCurrentHijriDate()
-                    views.setTextViewText(R.id.hjrDate, hijriDate + " AH")
+                    views.setTextViewText(R.id.hjrDate, hijriDate + " H")
                 } catch (e: Exception) {
                     Log.e(TAG, "Error getting Hijri date: ${e.message}")
                     views.setTextViewText(R.id.hjrDate, "N/A")
@@ -124,12 +125,17 @@ internal fun updateAppWidget(
         }
     })
 
+    //try to get city Location
+
     views.setOnClickPendingIntent(R.id.btn_isi, pendingIntent)
 
     views.setOnClickPendingIntent(R.id.dono,pendingIntent2)
 
+
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
+
+
 }
 
 fun getCurrentDate(): String {
@@ -149,4 +155,5 @@ fun getCurrentHijriDate(): String {
 fun getCurrentTime(): String {
     return SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
 }
+
 
