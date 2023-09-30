@@ -75,7 +75,27 @@ internal fun updateAppWidget(
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.jadwal_solat)
 
-    //Connect to API
+    //try to get cityId
+    val cityId = ApiConfig.getCityIdService().getCityId("kota jakarta")
+    cityId.enqueue(object : Callback<KodeKotaResponse> {
+        override fun onResponse(call: Call<KodeKotaResponse>, response: Response<KodeKotaResponse>) {
+
+            if (response.isSuccessful) {
+                val ids = response.body()?.kota?.get(0)?.id
+//                if (ids != null) {
+//                    idCity = ids
+//                }
+                views.setTextViewText(R.id.btn_isi, ids)
+            }
+        }
+
+        override fun onFailure(call: Call<KodeKotaResponse>, t: Throwable) {
+            Log.e(TAG, "onFailure: ${t.message}", )
+        }
+
+    })
+
+    //Connect to API ::622 kode plg
     val client = ApiConfig.getApiService().getJadwal("622", todayDate)
     client.enqueue(object : Callback<JadwalSolatResponse> {
         override fun onResponse(call: Call<JadwalSolatResponse>, response: Response<JadwalSolatResponse>) {
