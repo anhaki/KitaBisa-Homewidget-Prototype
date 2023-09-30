@@ -18,8 +18,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
+import java.time.chrono.HijrahDate
 
 
 /**
@@ -103,6 +106,13 @@ internal fun updateAppWidget(
                 }
 
                 views.setTextViewText(R.id.mshDate, response.body()?.jadwal?.data?.tanggal + " M")
+                try {
+                    val hijriDate = getCurrentHijriDate()
+                    views.setTextViewText(R.id.hjrDate, hijriDate + " AH")
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error getting Hijri date: ${e.message}")
+                    views.setTextViewText(R.id.hjrDate, "N/A")
+                }
                 appWidgetManager.partiallyUpdateAppWidget(appWidgetId, views)
             } else {
                 Log.e(TAG, "onFailure: ${response.message()}")
@@ -126,6 +136,17 @@ fun getCurrentDate(): String {
     return SimpleDateFormat("yyyy-MM-dd", Locale("id", "ID")).format(Date())
 }
 
+fun getCurrentHijriDate(): String {
+    val dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd")
+    val gregorianString = getCurrentDate()
+    val gregorianDate = LocalDate.parse(gregorianString, dateFormatter)
+    val islamicDate = HijrahDate.from(gregorianDate)
+
+    val hijriDateFormatter = DateTimeFormatter.ofPattern("dd MMMM uuuu", Locale("id", "ID"))
+    return islamicDate.format(hijriDateFormatter)
+}
+
 fun getCurrentTime(): String {
     return SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
 }
+
