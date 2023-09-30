@@ -1,6 +1,7 @@
 package com.kitapacak.wecan.API
 
 import com.kitapacak.wecan.Response.JadwalSolatResponse
+import com.kitapacak.wecan.Response.KodeKotaResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -12,4 +13,8 @@ interface APIService {
         @Path("tanggal") tanggal: String
     ): Call<JadwalSolatResponse>
 
+    @GET("nama/{kota}")
+    fun getCityId(
+        @Path("kota") kota: String
+    ): Call<KodeKotaResponse>
 }

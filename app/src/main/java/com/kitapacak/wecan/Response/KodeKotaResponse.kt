@@ -3,7 +3,6 @@ package com.kitapacak.wecan.Response
 import com.google.gson.annotations.SerializedName
 
 data class KodeKotaResponse(
-
 	@field:SerializedName("kota")
 	val kota: List<KotaItem?>? = null
 )

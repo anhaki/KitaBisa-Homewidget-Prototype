@@ -14,6 +14,7 @@ import com.kitapacak.wecan.DonasiOtomatisActivity
 import com.kitapacak.wecan.IsiSaldoActivity
 import com.kitapacak.wecan.R
 import com.kitapacak.wecan.Response.JadwalSolatResponse
+import com.kitapacak.wecan.Response.KodeKotaResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +26,7 @@ import java.util.Locale
 import java.time.chrono.HijrahDate
 
 
-/**
+/*
  * Implementation of App Widget functionality.
  */
 class JadwalSolat : AppWidgetProvider() {
@@ -125,16 +126,12 @@ internal fun updateAppWidget(
         }
     })
 
-    //try to get city Location
-
     views.setOnClickPendingIntent(R.id.btn_isi, pendingIntent)
 
     views.setOnClickPendingIntent(R.id.dono,pendingIntent2)
 
-
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
-
 
 }
 
