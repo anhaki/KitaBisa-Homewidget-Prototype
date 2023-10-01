@@ -13,7 +13,7 @@ Assalamu'alaikum...
 Repository ini dibuat sebagai pendukung dari proposal company capstone BANGKIT 2023 Batch 2 dari KitaBisa.com . Semoga dengan Prototype sederhana yang kami buat, dapat menjadi pertimbangan agar kami dapat mendukung pengembangan widget pada Aplikasi KitaBisa.com 
 
 ## Prototype Screenshots
-Berikut beberapa activity dalam konsep mengembangkan Widget ini
+Berikut beberapa activity sebagai konsep dalam pengembangan Widget ini
 
 ![WidgetKitabisa](https://github.com/anhaki/KitaBisa-Homewidget-Prototype/assets/90712252/7aa0fe69-b80a-4309-9998-a4264fead9fe)
 
