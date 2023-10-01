@@ -96,23 +96,53 @@ internal fun updateAppWidget(
                             val maghribTime = response.body()?.jadwal?.data?.maghrib
                             val isyaTime = response.body()?.jadwal?.data?.isya
 
-                            views.setTextViewText(R.id.timeImsak, imsakTime)
-                            views.setTextViewText(R.id.timeSubuh, subuhTime)
-                            views.setTextViewText(R.id.timeDzuhur, dzuhurTime)
-                            views.setTextViewText(R.id.timeAshar, asharTime)
-                            views.setTextViewText(R.id.timeMagrib, maghribTime)
-                            views.setTextViewText(R.id.timeIsya, isyaTime)
+                            if (imsakTime != null && subuhTime != null && dzuhurTime != null && asharTime != null &&
+                                maghribTime != null && isyaTime != null) {
+                                views.setTextViewText(R.id.timeImsak, imsakTime)
+                                views.setTextViewText(R.id.timeSubuh, subuhTime)
+                                views.setTextViewText(R.id.timeDzuhur, dzuhurTime)
+                                views.setTextViewText(R.id.timeAshar, asharTime)
+                                views.setTextViewText(R.id.timeMagrib, maghribTime)
+                                views.setTextViewText(R.id.timeIsya, isyaTime)
 
-                            //parse ke tipe Date agar dapat dibandingkan
-                            val parsedNowTime = timeFormatter.parse(nowTime)
+                                //parse ke tipe Date agar dapat dibandingkan
+                                val parsedNowTime = timeFormatter.parse(nowTime)
 
-                            if (parsedNowTime != null) {
-                                when{
-                                    parsedNowTime.before(subuhTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "Subuh $subuhTime")
-                                    parsedNowTime.before(dzuhurTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "Dzuhur $dzuhurTime")
-                                    parsedNowTime.before(asharTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "Ashar $asharTime")
-                                    parsedNowTime.before(maghribTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "Magrib $maghribTime")
-                                    parsedNowTime.before(isyaTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "Isya $isyaTime")
+                                if (parsedNowTime != null) {
+                                    when {
+                                        parsedNowTime.before(subuhTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(
+                                            R.id.nextSholat,
+                                            "Subuh $subuhTime"
+                                        )
+
+                                        parsedNowTime.before(dzuhurTime?.let {
+                                            timeFormatter.parse(
+                                                it
+                                            )
+                                        }) -> views.setTextViewText(
+                                            R.id.nextSholat,
+                                            "Dzuhur $dzuhurTime"
+                                        )
+
+                                        parsedNowTime.before(asharTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(
+                                            R.id.nextSholat,
+                                            "Ashar $asharTime"
+                                        )
+
+                                        parsedNowTime.before(maghribTime?.let {
+                                            timeFormatter.parse(
+                                                it
+                                            )
+                                        }) -> views.setTextViewText(
+                                            R.id.nextSholat,
+                                            "Magrib $maghribTime"
+                                        )
+
+                                        parsedNowTime.before(isyaTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(
+                                            R.id.nextSholat,
+                                            "Isya $isyaTime"
+                                        )
+                                    }
                                 }
                             }
 

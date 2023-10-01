@@ -85,16 +85,22 @@ class SettingsActivity : AppCompatActivity() {
             return
         }
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location ->
-            getCityName(location.latitude, location.longitude)
-            binding.tvCity.text = cityName
-            binding.tvCountryName.text = country
+            if (location != null) {
+                getCityName(location.latitude, location.longitude)
+                binding.tvCity.text = cityName
+                binding.tvCountryName.text = country
 
-            saveCity(cityName, country)
+                saveCity(cityName, country)
 
-            val resultIntent = Intent()
-            resultIntent.putExtra(EXTRA_RESULT, cityModel)
+                val resultIntent = Intent()
+                resultIntent.putExtra(EXTRA_RESULT, cityModel)
 
-            setResult(RESULT_CODE, resultIntent)
+                setResult(RESULT_CODE, resultIntent)
+            }
+            else {
+                // Handle the case where location is null, e.g., display an error message.
+                Toast.makeText(this, "Location not available", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
