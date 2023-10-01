@@ -4,11 +4,11 @@
     android:initialKeyguardLayout="@layout/jadwal_solat"
     android:initialLayout="@layout/jadwal_solat"
     android:minWidth="320dp"
-    android:minHeight="160dp"
+    android:minHeight="120dp"
     android:previewImage="@drawable/blue_coin"
     android:previewLayout="@layout/riwayat_donasi_widget"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="5"
     android:targetCellHeight="3"
-    android:updatePeriodMillis="86400000"
+    android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen" />

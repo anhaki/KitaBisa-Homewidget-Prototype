@@ -4,11 +4,11 @@
     android:initialKeyguardLayout="@layout/jadwal_solat"
     android:initialLayout="@layout/jadwal_solat"
     android:minWidth="320dp"
-    android:minHeight="160dp"
+    android:minHeight="120dp"
     android:previewImage="@drawable/img_2"
     android:previewLayout="@layout/jadwal_solat"
     android:resizeMode="horizontal|vertical"
     android:targetCellWidth="5"
     android:targetCellHeight="3"
-    android:updatePeriodMillis="86400000"
+    android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen" />
