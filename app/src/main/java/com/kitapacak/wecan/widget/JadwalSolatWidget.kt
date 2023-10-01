@@ -15,6 +15,8 @@ import com.kitapacak.wecan.IsiSaldoActivity
 import com.kitapacak.wecan.R
 import com.kitapacak.wecan.Response.JadwalSolatResponse
 import com.kitapacak.wecan.Response.KodeKotaResponse
+import com.kitapacak.wecan.SharedPref.CityModel
+import com.kitapacak.wecan.SharedPref.CityPreference
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,12 +51,13 @@ class JadwalSolat : AppWidgetProvider() {
         // Enter relevant functionality for when the last widget is disabled
     }
 }
-
 internal fun updateAppWidget(
     context: Context,
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
+    val cityPreference = CityPreference(context)
+    val getCity: CityModel = cityPreference.getCity()
 
     val buildCheck = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE else 0
 
@@ -76,16 +79,63 @@ internal fun updateAppWidget(
     val views = RemoteViews(context.packageName, R.layout.jadwal_solat)
 
     //try to get cityId
-    val cityId = ApiConfig.getCityIdService().getCityId("kota jakarta")
+    val cityId = ApiConfig.getCityIdService().getCityId(getCity.city.toString())
     cityId.enqueue(object : Callback<KodeKotaResponse> {
         override fun onResponse(call: Call<KodeKotaResponse>, response: Response<KodeKotaResponse>) {
-
             if (response.isSuccessful) {
-                val ids = response.body()?.kota?.get(0)?.id
-//                if (ids != null) {
-//                    idCity = ids
-//                }
-                views.setTextViewText(R.id.btn_isi, ids)
+                val idCity = response.body()?.kota?.get(0)?.id.toString()
+
+                val client = ApiConfig.getApiService().getJadwal(idCity, todayDate)
+                client.enqueue(object : Callback<JadwalSolatResponse> {
+                    override fun onResponse(call: Call<JadwalSolatResponse>, response: Response<JadwalSolatResponse>) {
+                        if (response.isSuccessful) {
+                            val imsakTime = response.body()?.jadwal?.data?.imsak
+                            val subuhTime = response.body()?.jadwal?.data?.subuh
+                            val dzuhurTime = response.body()?.jadwal?.data?.dzuhur
+                            val asharTime = response.body()?.jadwal?.data?.ashar
+                            val maghribTime = response.body()?.jadwal?.data?.maghrib
+                            val isyaTime = response.body()?.jadwal?.data?.isya
+
+                            views.setTextViewText(R.id.timeImsak, imsakTime)
+                            views.setTextViewText(R.id.timeSubuh, subuhTime)
+                            views.setTextViewText(R.id.timeDzuhur, dzuhurTime)
+                            views.setTextViewText(R.id.timeAshar, asharTime)
+                            views.setTextViewText(R.id.timeMagrib, maghribTime)
+                            views.setTextViewText(R.id.timeIsya, isyaTime)
+
+                            //parse ke tipe Date agar dapat dibandingkan
+                            val parsedNowTime = timeFormatter.parse(nowTime)
+
+                            if (parsedNowTime != null) {
+                                when{
+                                    parsedNowTime.before(subuhTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "Subuh $subuhTime")
+                                    parsedNowTime.before(dzuhurTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "Dzuhur $dzuhurTime")
+                                    parsedNowTime.before(asharTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "Ashar $asharTime")
+                                    parsedNowTime.before(maghribTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "Magrib $maghribTime")
+                                    parsedNowTime.before(isyaTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "Isya $isyaTime")
+                                }
+                            }
+
+                            views.setTextViewText(R.id.mshDate, response.body()?.jadwal?.data?.tanggal + " M")
+                            try {
+                                val hijriDate = getCurrentHijriDate()
+                                views.setTextViewText(R.id.hjrDate, "$hijriDate H")
+                            } catch (e: Exception) {
+                                Log.e(TAG, "Error getting Hijri date: ${e.message}")
+                                views.setTextViewText(R.id.hjrDate, "N/A")
+                            }
+                            appWidgetManager.partiallyUpdateAppWidget(appWidgetId, views)
+                        } else {
+                            Log.e(TAG, "onFailure: ${response.message()}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<JadwalSolatResponse>, t: Throwable) {
+                        Log.e(TAG, "onFailure: ${t.message}")
+                    }
+                })
+
+
             }
         }
 
@@ -96,56 +146,6 @@ internal fun updateAppWidget(
     })
 
     //Connect to API ::622 kode plg
-    val client = ApiConfig.getApiService().getJadwal("622", todayDate)
-    client.enqueue(object : Callback<JadwalSolatResponse> {
-        override fun onResponse(call: Call<JadwalSolatResponse>, response: Response<JadwalSolatResponse>) {
-            if (response.isSuccessful) {
-                val imsakTime = response.body()?.jadwal?.data?.imsak
-                val subuhTime = response.body()?.jadwal?.data?.subuh
-                val dzuhurTime = response.body()?.jadwal?.data?.dzuhur
-                val asharTime = response.body()?.jadwal?.data?.ashar
-                val maghribTime = response.body()?.jadwal?.data?.maghrib
-                val isyaTime = response.body()?.jadwal?.data?.isya
-
-                views.setTextViewText(R.id.timeImsak, imsakTime)
-                views.setTextViewText(R.id.timeSubuh, subuhTime)
-                views.setTextViewText(R.id.timeDzuhur, dzuhurTime)
-                views.setTextViewText(R.id.timeAshar, asharTime)
-                views.setTextViewText(R.id.timeMagrib, maghribTime)
-                views.setTextViewText(R.id.timeIsya, isyaTime)
-
-                //parse ke tipe Date agar dapat dibandingkan
-                val parsedNowTime = timeFormatter.parse(nowTime)
-
-                if (parsedNowTime != null) {
-                    when{
-                        parsedNowTime.before(subuhTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "SUBUH $subuhTime")
-                        parsedNowTime.before(dzuhurTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "DZUHUR $dzuhurTime")
-                        parsedNowTime.before(asharTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "ASHAR $asharTime")
-                        parsedNowTime.before(maghribTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "MAGRIB $maghribTime")
-                        parsedNowTime.before(isyaTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(R.id.nextSholat, "ISYA $isyaTime")
-                    }
-                }
-
-                views.setTextViewText(R.id.mshDate, response.body()?.jadwal?.data?.tanggal + " M")
-                try {
-                    val hijriDate = getCurrentHijriDate()
-                    views.setTextViewText(R.id.hjrDate, hijriDate + " H")
-                } catch (e: Exception) {
-                    Log.e(TAG, "Error getting Hijri date: ${e.message}")
-                    views.setTextViewText(R.id.hjrDate, "N/A")
-                }
-                appWidgetManager.partiallyUpdateAppWidget(appWidgetId, views)
-            } else {
-                Log.e(TAG, "onFailure: ${response.message()}")
-            }
-        }
-
-        override fun onFailure(call: Call<JadwalSolatResponse>, t: Throwable) {
-            Log.e(TAG, "onFailure: ${t.message}")
-        }
-    })
-
     views.setOnClickPendingIntent(R.id.btn_isi, pendingIntent)
 
     views.setOnClickPendingIntent(R.id.dono,pendingIntent2)
