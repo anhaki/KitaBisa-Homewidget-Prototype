@@ -15,8 +15,8 @@ Repository ini dibuat sebagai pendukung dari proposal company capstone BANGKIT 2
 ## Prototype Screenshots
 Berikut beberapa activity dalam konsep mengembangkan Widget ini
 
+![WidgetKitabisa](https://github.com/anhaki/KitaBisa-Homewidget-Prototype/assets/90712252/7aa0fe69-b80a-4309-9998-a4264fead9fe)
 
-![Group 2](https://github.com/anhaki/KitaBisa-Homewidget-Prototype/assets/90712252/496094f0-9ea7-4ab0-bd67-9ebe55e85f62)
 
 ## Features
 #### 1. Prayer Schedule Widget
