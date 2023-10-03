@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Waktu sholat selanjutnya"
+                    android:text="@string/waktu_sholat_selanjutnya"
                     android:textSize="12sp" />
 
                 <TextView
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Ashar 15:21 WIB"
+                    android:text="@string/izinkan_lokasi"
                     android:textColor="#2270AE"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -71,7 +71,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="3 Juli 2023 M"
+                    android:text="@string/none"
+                    android:textColor="#595959"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/kaaba" />
@@ -81,7 +82,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="14 Dzulhijjah 1444 H"
+                    android:text="@string/none"
+                    android:textColor="#595959"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/mshDate" />
@@ -116,15 +118,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Imsak" />
+                    android:text="@string/imsak" />
 
                 <TextView
                     android:id="@+id/timeImsak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="04:33"
+                    android:text="@string/none"
                     android:textSize="16sp"
+                    android:textColor="#3E3E3E"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -140,14 +143,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Subuh" />
+                    android:text="@string/subuh" />
 
                 <TextView
                     android:id="@+id/timeSubuh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="04:43"
+                    android:text="@string/none"
+                    android:textColor="#3E3E3E"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -164,15 +168,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Dzuhur" />
+                    android:text="@string/dzuhur" />
 
                 <TextView
                     android:id="@+id/timeDzuhur"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="15:21"
+                    android:text="@string/none"
                     android:textSize="16sp"
+                    android:textColor="#3E3E3E"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -188,14 +193,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Ashar" />
+                    android:text="@string/ashar" />
 
                 <TextView
                     android:id="@+id/timeAshar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="12:00"
+                    android:text="@string/none"
+                    android:textColor="#3E3E3E"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -212,14 +218,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Magrib" />
+                    android:text="@string/magrib" />
 
                 <TextView
                     android:id="@+id/timeMagrib"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="17:53"
+                    android:text="@string/none"
+                    android:textColor="#3E3E3E"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -236,14 +243,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Isya" />
+                    android:text="@string/isya" />
 
                 <TextView
                     android:id="@+id/timeIsya"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="19:07"
+                    android:text="@string/none"
+                    android:textColor="#3E3E3E"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -266,7 +274,7 @@
                 android:id="@+id/ttlDonasi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kantong Donasimu"
+                android:text="@string/kantong_donasimu"
                 android:textSize="12sp" />
 
             <TextView
@@ -274,7 +282,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ttlDonasi"
-                android:text="Rp. 2000"
+                android:text="@string/saldo"
                 android:textColor="@color/light_blue_600"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -287,7 +295,7 @@
                 android:layout_toEndOf="@id/ttlDonasi"
                 android:backgroundTint="@color/light_blue_600"
                 android:elevation="0dp"
-                android:text="Isi"
+                android:text="@string/isi"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -311,7 +319,7 @@
                 android:id="@+id/ttlOto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Donasi Otomatis"
+                android:text="@string/donasi_otomatis"
 
                 android:textSize="12sp" />
 
@@ -320,7 +328,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ttlOto"
-                android:text="Lihat Detail"
+                android:text="@string/lihat_detail"
                 android:textColor="@color/light_blue_600"
                 android:textSize="12sp"
                 android:textStyle="bold" />

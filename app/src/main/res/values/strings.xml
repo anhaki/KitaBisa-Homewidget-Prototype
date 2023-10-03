@@ -21,4 +21,17 @@
     <string name="app_widget_description">This is an app widget description</string>
     <string name="dummy_cash">2000</string>
     <string name="pengaturan">Pengaturan</string>
+    <string name="none">-</string>
+    <string name="waktu_sholat_selanjutnya">Waktu sholat selanjutnya</string>
+    <string name="izinkan_lokasi">Izinkan Lokasi</string>
+    <string name="imsak">Imsak</string>
+    <string name="subuh">Subuh</string>
+    <string name="dzuhur">Dzuhur</string>
+    <string name="ashar">Ashar</string>
+    <string name="magrib">Magrib</string>
+    <string name="isya">Isya</string>
+    <string name="kantong_donasimu">Kantong Donasimu</string>
+    <string name="saldo">Rp. 2000</string>
+    <string name="lihat_detail">Lihat Detail</string>
+    <string name="isi">Isi</string>
 </resources>

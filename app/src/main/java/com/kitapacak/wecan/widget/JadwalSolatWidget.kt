@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.util.Log
 import android.widget.RemoteViews
@@ -56,6 +57,9 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
+    // Construct the RemoteViews object
+    val views = RemoteViews(context.packageName, R.layout.jadwal_solat)
+
     val cityPreference = CityPreference(context)
     val getCity: CityModel = cityPreference.getCity()
 
@@ -75,8 +79,6 @@ internal fun updateAppWidget(
     //digunakan untuk parse ke tipe Date
     val timeFormatter = SimpleDateFormat("HH:mm", Locale("id", "ID"))
 
-    // Construct the RemoteViews object
-    val views = RemoteViews(context.packageName, R.layout.jadwal_solat)
 
     //try to get cityId
     val cityId = ApiConfig.getCityIdService().getCityId(getCity.city.toString())
@@ -85,7 +87,7 @@ internal fun updateAppWidget(
             if (response.isSuccessful) {
                 val idCity = response.body()?.kota?.get(0)?.id.toString()
 
-                val client = ApiConfig.getApiService().getJadwal(idCity, todayDate)
+                val client = ApiConfig.getApiService().getJadwal(idCity, todayDate.toString())
                 client.enqueue(object : Callback<JadwalSolatResponse> {
                     override fun onResponse(call: Call<JadwalSolatResponse>, response: Response<JadwalSolatResponse>) {
                         if (response.isSuccessful) {
@@ -110,43 +112,63 @@ internal fun updateAppWidget(
 
                                 if (parsedNowTime != null) {
                                     when {
-                                        parsedNowTime.before(subuhTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(
-                                            R.id.nextSholat,
-                                            "Subuh $subuhTime"
-                                        )
+                                        parsedNowTime.before(subuhTime.let { timeFormatter.parse(it) }) -> {
+                                            views.setTextViewText(R.id.nextSholat, "Subuh $subuhTime")
+                                            views.setTextColor(R.id.timeSubuh, Color.parseColor("#2270AE"))
+                                            views.setTextColor(R.id.timeIsya, Color.parseColor("#3E3E3E"))
+                                        }
 
-                                        parsedNowTime.before(dzuhurTime?.let {
-                                            timeFormatter.parse(
-                                                it
-                                            )
-                                        }) -> views.setTextViewText(
-                                            R.id.nextSholat,
-                                            "Dzuhur $dzuhurTime"
-                                        )
+                                        parsedNowTime.before(dzuhurTime.let {timeFormatter.parse(it) }) ->{
+                                            views.setTextViewText(R.id.nextSholat, "Dzuhur $dzuhurTime")
+                                            views.setTextColor(R.id.timeDzuhur, Color.parseColor("#2270AE"))
+                                            views.setTextColor(R.id.timeSubuh, Color.parseColor("#3E3E3E"))
+                                        }
 
-                                        parsedNowTime.before(asharTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(
-                                            R.id.nextSholat,
-                                            "Ashar $asharTime"
-                                        )
+                                        parsedNowTime.before(asharTime.let {timeFormatter.parse(it) }) ->{
+                                            views.setTextViewText(R.id.nextSholat, "Ashar $asharTime")
+                                            views.setTextColor(R.id.timeAshar, Color.parseColor("#2270AE"))
+                                            views.setTextColor(R.id.timeDzuhur, Color.parseColor("#3E3E3E"))
+                                        }
 
-                                        parsedNowTime.before(maghribTime?.let {
-                                            timeFormatter.parse(
-                                                it
-                                            )
-                                        }) -> views.setTextViewText(
-                                            R.id.nextSholat,
-                                            "Magrib $maghribTime"
-                                        )
+                                        parsedNowTime.before(maghribTime.let {timeFormatter.parse(it) }) ->{
+                                            views.setTextViewText(R.id.nextSholat, "Magrib $maghribTime")
+                                            views.setTextColor(R.id.timeMagrib, Color.parseColor("#2270AE"))
+                                            views.setTextColor(R.id.timeAshar, Color.parseColor("#3E3E3E"))
+                                        }
 
-                                        parsedNowTime.before(isyaTime?.let { timeFormatter.parse(it) }) -> views.setTextViewText(
-                                            R.id.nextSholat,
-                                            "Isya $isyaTime"
-                                        )
+                                        parsedNowTime.before(isyaTime.let {timeFormatter.parse(it) }) ->{
+                                            views.setTextViewText(R.id.nextSholat, "Isya $isyaTime")
+                                            views.setTextColor(R.id.timeIsya, Color.parseColor("#2270AE"))
+                                            views.setTextColor(R.id.timeMagrib, Color.parseColor("#3E3E3E"))
+                                        }
+                                        else -> {
+                                            val clientNext = ApiConfig.getApiService().getJadwal(idCity, todayDate?.plusDays(1).toString())
+                                            clientNext.enqueue(object : Callback<JadwalSolatResponse> {
+                                                override fun onResponse(call: Call<JadwalSolatResponse>, response: Response<JadwalSolatResponse>) {
+                                                    if (response.isSuccessful) {
+                                                        val nextSubuhTime = response.body()?.jadwal?.data?.subuh
+                                                        views.setTextViewText(R.id.nextSholat, "Subuh $nextSubuhTime")
+                                                        views.setTextColor(R.id.timeIsya, Color.parseColor("#3E3E3E"))
+                                                        appWidgetManager.partiallyUpdateAppWidget(appWidgetId, views)
+                                                    } else {
+                                                        Log.e(TAG, "Failed to get next day's prayer times: ${response.message()}")
+                                                    }
+                                                }
+
+                                                override fun onFailure(call: Call<JadwalSolatResponse>, t: Throwable) {
+                                                    Log.e(TAG, "onFailure: ${t.message}")
+                                                }
+                                            })
+                                        }
+
                                     }
                                 }
                             }
 
                             views.setTextViewText(R.id.mshDate, response.body()?.jadwal?.data?.tanggal + " M")
+                            if (todayDate != null) {
+                                views.setTextViewText(R.id.ttlDonasi, todayDate.plusDays(1).toString())
+                            }
                             try {
                                 val hijriDate = getCurrentHijriDate()
                                 views.setTextViewText(R.id.hjrDate, "$hijriDate H")
@@ -175,7 +197,7 @@ internal fun updateAppWidget(
 
     })
 
-    //Connect to API ::622 kode plg
+        //Connect to API ::622 kode plg
     views.setOnClickPendingIntent(R.id.btn_isi, pendingIntent)
 
     views.setOnClickPendingIntent(R.id.dono,pendingIntent2)
@@ -185,13 +207,13 @@ internal fun updateAppWidget(
 
 }
 
-fun getCurrentDate(): String {
-    return SimpleDateFormat("yyyy-MM-dd", Locale("id", "ID")).format(Date())
+fun getCurrentDate(): LocalDate? {
+    return LocalDate.now()
 }
 
 fun getCurrentHijriDate(): String {
     val dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd")
-    val gregorianString = getCurrentDate()
+    val gregorianString = getCurrentDate().toString()
     val gregorianDate = LocalDate.parse(gregorianString, dateFormatter)
     val islamicDate = HijrahDate.from(gregorianDate)
 
