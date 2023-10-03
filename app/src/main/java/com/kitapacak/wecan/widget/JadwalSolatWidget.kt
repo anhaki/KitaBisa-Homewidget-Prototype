@@ -165,13 +165,11 @@ internal fun updateAppWidget(
                                 }
                             }
 
-                            views.setTextViewText(R.id.mshDate, response.body()?.jadwal?.data?.tanggal + " M")
-                            if (todayDate != null) {
-                                views.setTextViewText(R.id.ttlDonasi, todayDate.plusDays(1).toString())
-                            }
                             try {
                                 val hijriDate = getCurrentHijriDate()
+                                val masehiDate = getCurrentMasehiDate()
                                 views.setTextViewText(R.id.hjrDate, "$hijriDate H")
+                                views.setTextViewText(R.id.mshDate,"$masehiDate M")
                             } catch (e: Exception) {
                                 Log.e(TAG, "Error getting Hijri date: ${e.message}")
                                 views.setTextViewText(R.id.hjrDate, "N/A")
@@ -196,6 +194,7 @@ internal fun updateAppWidget(
         }
 
     })
+    views.setTextViewText(R.id.titleWaktu,"${getCity.city.toString()} \nWaktu Sholat selanjutnya")
 
         //Connect to API ::622 kode plg
     views.setOnClickPendingIntent(R.id.btn_isi, pendingIntent)
@@ -209,6 +208,11 @@ internal fun updateAppWidget(
 
 fun getCurrentDate(): LocalDate? {
     return LocalDate.now()
+}
+private fun getCurrentMasehiDate(): String {
+    val masehiFormat = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy",Locale("id", "ID") )
+    val date = getCurrentDate()?.format(masehiFormat).toString()
+    return date
 }
 
 fun getCurrentHijriDate(): String {
