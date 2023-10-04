@@ -15,7 +15,8 @@ Repository ini dibuat sebagai pendukung dari proposal company capstone BANGKIT 2
 ## Prototype Screenshots
 Berikut beberapa activity sebagai konsep dalam pengembangan Widget ini
 
-![WidgetKitabisa](https://github.com/anhaki/KitaBisa-Homewidget-Prototype/assets/90712252/7aa0fe69-b80a-4309-9998-a4264fead9fe)
+![Main](https://github.com/anhaki/KitaBisa-Homewidget-Prototype/assets/90712252/1adbe4c4-613a-4e50-bea4-234752f9dec1)
+
 
 
 ## Features
@@ -42,6 +43,9 @@ terdapat beberapa langkah dalam implementasi fitur Jadwal Sholat berdasarkan lok
 4. Get API Sholat 5 waktu dari ID kota user
 * Menggunakan Response dari endpoint
 -https://api.banghasan.com/sholat/format/json/jadwal/kota/{ID kota}/tanggal/{getDate}
+
+![UserLocation](https://github.com/anhaki/KitaBisa-Homewidget-Prototype/assets/90712252/169dd6fa-9dcd-45bd-bb43-c7f8cc58dab1)
+
 
 - [x] Menampilkan Kalender Masehi
 
