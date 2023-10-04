@@ -44,7 +44,7 @@ terdapat beberapa langkah dalam implementasi fitur Jadwal Sholat berdasarkan lok
 * Menggunakan Response dari endpoint
 -https://api.banghasan.com/sholat/format/json/jadwal/kota/{ID kota}/tanggal/{getDate}
 
-![UserLocation (1)](https://github.com/anhaki/KitaBisa-Homewidget-Prototype/assets/90712252/0a901088-d584-4417-8840-0f4dd1fdf6bd)
+![HUHUU (2)](https://github.com/anhaki/KitaBisa-Homewidget-Prototype/assets/90712252/7d4c0e85-8642-456b-8013-a800a487fed5)
 
 
 - [x] Menampilkan Kalender Masehi
