@@ -81,7 +81,7 @@ internal fun updateAppWidget(
 
 
     //try to get cityId
-    val cityId = ApiConfig.getCityIdService().getCityId(getCity.city.toString())
+    val cityId = ApiConfig.getApiService().getCityId(getCity.city.toString())
     cityId.enqueue(object : Callback<KodeKotaResponse> {
         override fun onResponse(call: Call<KodeKotaResponse>, response: Response<KodeKotaResponse>) {
             if (response.isSuccessful) {

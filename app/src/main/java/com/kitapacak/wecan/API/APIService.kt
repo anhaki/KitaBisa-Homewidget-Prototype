@@ -13,7 +13,7 @@ interface APIService {
         @Path("tanggal") tanggal: String
     ): Call<JadwalSolatResponse>
 
-    @GET("nama/{kota}")
+    @GET("kota/nama/{kota}")
     fun getCityId(
         @Path("kota") kota: String
     ): Call<KodeKotaResponse>
